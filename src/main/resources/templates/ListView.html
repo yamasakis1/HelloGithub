@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<span class="message" th:text="${message}"></span>
+
+<table class="ViewItemList">
+<tr>
+  <th>商品一覧</th>
+</tr>
+<tr th:each = "form : ${forms}">
+	<td class="ViewItemList">
+	      <a th:text="${form.name}"></a><a>:</a><a th:text="${form.price}"></a><a>円</a>
+	</td>
+
+</tr>
+</table>
+
+<br><a>購入する</a>
+
+
+
+<form action="#" th:action="@{/shop}" th:object="${Order}" method="post">
+
+            <select th:field="*{name}">
+                <option th:each="form : ${forms}"
+                th:value="${form.name}"
+                        th:text="${form.name}">
+                </option>
+            </select>
+
+	      		<a>数量</a><input type = "text" name = "text" th:field="*{num}" >
+<input type = "submit" name = "submit" value = "カートに入れる"><br>
+</form>
+<br>
+
+<table class="ViewCartList">
+<tr>
+  <th>カートの中身</th>
+</tr>
+<tr th:each = "form : ${forms}">
+	  <td class="ViewCartList">
+	      <a th:text="${form.name}"></a><a>:</a><a th:text="${form.price}"></a><a>円</a>
+	  </td>
+</tr>
+</table>
+
+</body>
+</html>
